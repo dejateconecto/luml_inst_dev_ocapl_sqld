@@ -115,4 +115,20 @@ ALTER SEQUENCE dept_deptid_seq
 
 
 --DROP SEQUENCE dept_deptid_seq;
+
+CREATE INDEX emp_last_name_idx
+ON employees(last_name);
+--DROP INDEX index_name;
+
+
+
+CREATE OR REPLACE SYNONYM oe.wtf 
+FOR hr.employees;
+
+DROP SYNONYM wtf ;
+
+SELECT * FROM wtf;
+
+grant select on wtf to oe;
   
+  DESC wtf;
