@@ -132,3 +132,14 @@ SELECT * FROM wtf;
 grant select on wtf to oe;
   
   DESC wtf;
+
+  CREATE OR REPLACE SYNONYM oe.locations 
+FOR hr.locations;
+
+
+/*
+los grants a usar son:
+  GRANT PUBLIC SYNONYM ON scheme_name.synonym_name TO object_owner_scheme_name.object_name;
+  GRANT SYNONYM ON scheme_name.synonym_name TO object_owner_scheme_name.object_name;
+  -- not to use GRANT ANY SYNONYM
+*/
