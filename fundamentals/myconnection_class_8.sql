@@ -90,6 +90,29 @@ AS SELECT *
 
 -- Throws error ORA-42399: cannot perform a DML operation on a read-only view
 UPDATE emp20_v SET salary = 2000;
-   
-   
+
+CREATE SEQUENCE dept_deptid_seq
+  INCREMENT BY 10
+  START WITH 1010
+  MAXVALUE 9999
+  NOCACHE
+  NOCYCLE;
+
+SELECT departments_seq.CURRVAL FROM dual;
+--Sequences
+INSERT INTO departments (department_id,department_name, location_id)
+VALUES (dept_deptid_seq.NEXTVAL,'Support',2500);
+
+SELECT dept_deptid_seq.CURRVAL FROM dual;
+
+--Para alterar se debe de ser dueño del objeto 
+ALTER SEQUENCE dept_deptid_seq
+  INCREMENT BY 10
+  --START WITH 3000--00000 -  "cannot alter starting sequence number"
+  MAXVALUE 9999
+  NOCACHE
+  NOCYCLE;
+
+
+--DROP SEQUENCE dept_deptid_seq;
   
