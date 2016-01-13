@@ -1,0 +1,49 @@
+/* ########################################################################################################################################
+*
+*                                     Notes for inst_dev_ocapl_sqld course
+*
+*  ########################################################################################################################################
+	Concepts: 
+		DML -Data Manipulation Language (SELECT, INSERT, UPDATE, DELETE, AND MERGE)
+		DDL -Data Definition Language (CREATE, ALTER, DROP, RENAME, TRUNCATE AND COMMENT)
+		DCL -Data Control Language (GRANT AND REVOKE)
+		TC -Transaction Control (COMMIT, ROLLBACK AND SAVEPOINT)
+		DBMS - DataBase Management System
+
+	Types of databases: hierarchical, network, relational and object relational
+
+*  ########################################################################################################################################
+*
+*                                                  Lesson 1 Retrieving data using the SQL statement
+*
+*  ########################################################################################################################################
+
+	Projection.- Selected columns to be displayed
+	Selection.- Selected rows to be displayed
+	Join.- Bring together data by specifying the link between different tables
+
+	keyword refers to an individual SQL element (SELECT or FROM)
+	clause is a part of a SQL statement (SELECT employee_id, last_name)
+	statement is a conbination of two or more clauses (SELECT * FROM employees)
+
+	Arithmetic Expressions
+
+		Operator precedence
+			Multiplication and division occur before addition and substraction
+			Operatiors of the same priority are evaluated from left to right
+			Parentheses are used to override the default procedence or to clarify the statement
+
+	Null value
+
+	Null is a value that is unavailable, unassigned, unknown or inapplicable. Null is not the same as zero (zero is a number) or a blank space (blank space is a character)
+
+	Aliases
+
+	AS is an optional keyword
+
+	Data types
+
+	NUMBER(p,s) Number value having a maximum number of digits p, with s digits to the right of the decimal point
+	VARCHAR2(s) Variable-length character value of maximum size s
+	DATE Date and time between January 1, 4712 B.C. and December 31, A.D. 9999
+*/
