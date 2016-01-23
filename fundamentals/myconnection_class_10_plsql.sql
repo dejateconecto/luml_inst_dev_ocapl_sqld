@@ -89,7 +89,9 @@ END;
 DECLARE
   v_my_date DATE := SYSDATE;
   v_round NUMBER (3,2);
+  v_random NUMBER (20) DEFAULT 0;
   custume_exception EXCEPTION;
+  v_div_by_zero NUMBER (1) DEFAULT 0;
 BEGIN
   DBMS_OUTPUT.PUT_LINE(q'<<-- outer block starts here-->>');
   DBMS_OUTPUT.PUT_LINE(q'<Today is >' || SYSDATE);
@@ -105,12 +107,16 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(q'<Months without TRUNC() function: >' || v_months);
     v_months := TRUNC(v_months);
     DBMS_OUTPUT.PUT_LINE(q'<Months with TRUNC() function: >' || v_months);
-    v_random := DBMS_RANDOM.RANDOM/1000000000*v_months;
+    outer_block.v_random := DBMS_RANDOM.RANDOM/1000000000;
+    DBMS_OUTPUT.PUT_LINE(q'<Random value: >' || outer_block.v_random);
+    v_random := outer_block.v_random*v_months;
     DBMS_OUTPUT.PUT_LINE(q'<Random (random*months) value: >' || v_random);
     CASE WHEN v_random > 0 THEN
         DBMS_OUTPUT.PUT_LINE(q'<random (random*months) value >' || v_random || q'< is POSITIVE>');
       WHEN v_random = 0 THEN
         DBMS_OUTPUT.PUT_LINE(q'<random (random*months) value >' || v_random || q'< is ZERO>');
+        DBMS_OUTPUT.PUT_LINE(q'<division by zero>');
+        v_div_by_zero := 100 / v_div_by_zero;
       ELSE
         RAISE custume_exception;
         --DBMS_OUTPUT.PUT_LINE(q'<random (random*months) value >' || v_random || q'< is NEGATIVE>');
@@ -118,6 +124,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(q'<<-- inner block ends here-->>');
   END;
   DBMS_OUTPUT.PUT_LINE(q'<<-- outer block ends here-->>');
+  DBMS_OUTPUT.PUT_LINE(q'<<-- FINISHED SUCCESSFULLY-->>');
   EXCEPTION WHEN custume_exception THEN
     DBMS_OUTPUT.PUT_LINE(q'<<-- An unhandled exception was thrown due to an invalid negative number -->>');
     --DBMS_OUTPUT.PUT_LINE(q'<<-- exception was thrown -->>');
