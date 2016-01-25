@@ -47,3 +47,50 @@
 	VARCHAR2(s) Variable-length character value of maximum size s
 	DATE Date and time between January 1, 4712 B.C. and December 31, A.D. 9999
 */
+
+*  ########################################################################################################################################
+*
+*                                                  Lesson 1 Restricting and Sorting Data
+*
+*  ########################################################################################################################################
+
+WHERE clause is used after FROM clause.
+
+You cannont use column alias in the WEHERE clause
+
+Character strings and data values are enconled with single quoation marks (such as 'Luis' and '30-NOV-89'). Strings is case-sensitive and dates are format-sensitive. Defualt format for date 'DD-MON-RR'.
+
+Oracle DB's stores dates in an internal numeric format, representing century, year, month, day, hours, minutes and seconds.
+
+Operators
+
+"No equal to" condition can be represented by: <>, != or ^=
+
+Values which are retrieved by BETWEEN operator are inclusive.
+
+IN is also known as "membership condition", an internally oracle server evaluates it as a set of OR conditions with no performance benefits.
+
+LIKE operator can use "%" for zero or many characters or "_" for one character. Use of both wildcards is valid for example "last_name LIKE '_o%';", to find all rows wich second name is "o". In addition, use of ESCAPE identifier help us find rows which include wildcard character (% and _) for example "job_id LIKE '%SA\_%';"
+
+
+NULL value is unavailable, unassigned, unknown or inapplicable for that reason we cannot test =. For all those case when we want to retrieve NULL values we can test with IS NULL operator or IS NOT NULL.
+
+
+NOT operator can be used with other SQL operator such as BETWEEN, LIKE and NULL
+
+
+[ORDER BY {column, expr, numeric_position}  [ASC|DESC] [NULLS FIRST|NULLS LAST]] clause. 
+
+
+
+Substitution Variables
+
+To supplement: 
+	WHERE conditions
+	ORDER BY clauses
+	Column expressions
+	Table names
+	Entire SELECT statements
+
+
+SET VERIFY ON, help us to see in the console output how values define for the DEFINE statement where substituted
