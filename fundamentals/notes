@@ -50,7 +50,7 @@
 
 *  ########################################################################################################################################
 *
-*                                                  Lesson 1 Restricting and Sorting Data
+*                                                  Lesson 2 Restricting and Sorting Data
 *
 *  ########################################################################################################################################
 
@@ -94,3 +94,28 @@ To supplement:
 
 
 SET VERIFY ON, help us to see in the console output how values define for the DEFINE statement where substituted
+
+*  ########################################################################################################################################
+*
+*                                                  Lesson 3 Using Single-Row Funstions to Customize Output
+*
+*  ########################################################################################################################################
+
+Functions can be used to do the following
+	Perform calculations on data
+	Modify individual data items
+	Manipulate output for groups of rows
+	Format date and numbers for display
+	Convert column data types
+
+	SQL functions sometimes takes arguments and always return a value.
+
+	Single-row -> Return one result per row
+		Character
+		Number
+		Date
+		Convertion
+		General
+
+		
+	Multiple-row -> Return one result per set of rows
