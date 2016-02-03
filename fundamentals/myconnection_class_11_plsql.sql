@@ -214,7 +214,8 @@ DECLARE
   v_years NUMBER(2);
   v_days NUMBER(8);
 BEGIN
-  SELECT last_name, hire_date, job_id, salary, commission_pct, manager_id, department_id INTO v_lname_bye, v_hdate_bye, v_jobid_bye,v_salary_bye,v_cpct_bye ,v_mgr_id_bye, v_deparment_id_bye
+  SELECT last_name, hire_date, job_id, salary, commission_pct, manager_id, department_id 
+    INTO v_lname_bye, v_hdate_bye, v_jobid_bye,v_salary_bye,v_cpct_bye ,v_mgr_id_bye, v_deparment_id_bye
   FROM copy_emp WHERE employee_id = v_emp_id;
   DBMS_OUTPUT.PUT_LINE('El empleado "' || v_lname || '" fue contratado el ' || TO_CHAR(v_hdate_bye,'DD-MON-YYYY'));
   IF v_hdate_bye < TO_DATE('01-ENE-99','DD-MON-RR') THEN
@@ -269,6 +270,14 @@ BEGIN
       END IF;
     ELSE
       DBMS_OUTPUT.PUT_LINE('Yo trabajo en el departamento' || v_deparment_id_bye);
+      IF NVL(v_cpct_bye,0) > 0 THEN
+        UPDATE copy_emp
+        SET commission_pct = 0
+        WHERE employee_id = v_emp_id;
+        v_rows_updated := ( SQL%ROWCOUNT || ' row(s) was/were updated');
+        DBMS_OUTPUT.PUT_LINE(v_rows_updated);
+        DBMS_OUTPUT.PUT_LINE('Me quitaron mi comisión por que no soy vendedor, ahora me quedo ganando ' || v_salary_bye);
+      END IF;
     END IF;
   END IF;
   ROLLBACK;
