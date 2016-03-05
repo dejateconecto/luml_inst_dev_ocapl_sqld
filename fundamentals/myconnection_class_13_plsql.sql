@@ -131,7 +131,7 @@ END;*/
 
 
 
-DECLARE 
+/*DECLARE 
   e_insert_too_long_col EXCEPTION;
   w NUMBER := 2;
   PRAGMA EXCEPTION_INIT (e_insert_too_long_col, -12899);
@@ -140,4 +140,22 @@ BEGIN
   EXCEPTION 
     WHEN e_insert_too_long_col THEN 
       DBMS_OUTPUT.PUT_LINE('HANDLED');
+END;*/
+
+-- ERRORES https://docs.oracle.com/cd/E11882_01/server.112/e17766/toc.htm
+
+DECLARE 
+  v_mgr NUMBER := 23456;
+BEGIN
+  DELETE FROM employees
+    WHERE manager_id = v_mgr;
+ /* IF SQL%NOTFOUND THEN
+    RAISE_APPLICATION_ERROR (-20202, 'ID ' || v_mgr || ' is not a valid manager id',TRUE);
+  END IF;*/
+  
+  /*OR IN THE EXCEPTIONS SECTION:*/
+  EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+    RAISE_APPLICATION_ERROR (-20202, 'This is not a valid manager');
+    
 END;
