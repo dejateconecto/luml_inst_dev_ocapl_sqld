@@ -108,9 +108,79 @@ END get_sal;
 
 EXECUTE DBMS_OUTPUT.PUT_LINE(get_sal(100));*/
 
-DECLARE
+/*DECLARE
   sal employees.salary%TYPE;
 BEGIN
   sal := get_sal(100);
   DBMS_OUTPUT.PUT_LINE('The salary is: ' || sal);
-END;
+END;*/
+
+/*CREATE OR REPLACE FUNCTION dml_call_sql (p_sal NUMBER)
+RETURN NUMBER IS
+BEGIN
+  INSERT INTO employees ( employee_id, last_name, email, hire_date, job_id, salary)
+  VALUES (1,'Frost','jfrost@company.com',SYSDATE, 'SA_MAN',p_sal);
+  RETURN (p_sal + 100);
+END dml_call_sql;*/
+
+/*UPDATE employees
+SET salary = dml_call_sql (2000)
+WHERE employee_id = 170;*/
+
+/*#################################################################################################################
+* 
+*                                                  Creating Packages
+*                                                                    
+*################################################################################################################*/
+-- The package spec with a public variable and a
+-- public procedure that are accessible from
+-- outside the package.
+/*CREATE OR REPLACE PACKAGE comm_pkg IS
+  v_std_comm NUMBER; --:= 0.10; --initialized to o.1o
+PROCEDURE reset_comm ( p_new_comm NUMBER );
+END comm_pkg;*/
+
+/*DECLARE
+  v_my_sal NUMBER := 2000;
+BEGIN
+  hr.comm_pkg.v_std_comm := .1;
+  DBMS_OUTPUT.PUT_LINE('Mi salario es ' || v_my_sal || ' y aumentado en un ' || 100*hr.comm_pkg.v_std_comm || '%, es ' || (v_my_sal + v_my_sal * hr.comm_pkg.v_std_comm));
+END;*/
+
+
+
+/*CREATE OR REPLACE PACKAGE BODY comm_pkg IS
+  FUNCTION validate(p_comm NUMBER) RETURN BOOLEAN IS v_max_comm employees.commission_pct%TYPE;
+  BEGIN
+    SELECT MAX(commission_pct) INTO v_max_comm
+    FROM employees;
+    RETURN (p_comm BETWEEN 0.0 AND v_max_comm);
+  END validate;
+  
+  PROCEDURE reset_comm ( p_new_comm NUMBER ) IS
+  BEGIN
+    IF validate(p_new_comm) THEN
+      v_std_comm := p_new_comm; --reset public var
+    ELSE 
+      RAISE_APPLICATION_ERROR (-20210,'Bad Commission');
+    END IF;
+  END reset_comm;
+END comm_pkg;*/
+--EXECUTE hr.comm_pkg.reset_comm (-0.1);
+
+CREATE OR REPLACE PACKAGE forward_pkg IS
+PROCEDURE award_bonus;
+END forward_pkg;
+CREATE OR REPLACE PACKAGE BODY forward_pkg IS
+  PROCEDURE calc_rating;
+  PROCEDURE award_bonus IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('award_bonus');
+    calc_rating();
+  END award_bonus;
+
+  PROCEDURE calc_rating IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('calc_rating');
+  END calc_rating;
+END forward_pkg;
