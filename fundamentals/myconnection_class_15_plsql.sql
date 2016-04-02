@@ -107,3 +107,28 @@ END;
 BEGIN
   EXECUTE IMMEDIATE 'UPDATE HR.COPY_EMP SET SALARY = 100000 WHERE manager_id = 100';
 END;
+
+
+--BIND Variable
+
+
+BEGIN
+  EXECUTE IMMEDIATE 'UPDATE HR.COPY_EMP SET SALARY = 12000 WHERE manager_id = :x' USING 101;
+END;
+
+
+BEGIN
+  EXECUTE IMMEDIATE 'UPDATE HR.COPY_EMP SET SALARY = 33333 WHERE manager_id = :x AND employee_id = :y' USING 122,133;
+END;
+
+
+
+--BIND 
+DECLARE 
+  v_id NUMBER;
+  v_name VARCHAR2(100);
+BEGIN
+  EXECUTE IMMEDIATE 'SELECT department_id, department_name FROM departments WHERE department_id = :y' INTO v_id, v_name USING 60;
+  DBMS_OUTPUT.PUT_LINE(v_id);
+  DBMS_OUTPUT.PUT_LINE(v_name);
+END;
