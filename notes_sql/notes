@@ -1,0 +1,168 @@
+ ########################################################################################################################################
+
+                                     Notes for inst_dev_oca_sql_fundamentals course
+
+  ########################################################################################################################################
+	Concepts 
+		DML -Data Manipulation Language (SELECT, INSERT, UPDATE, DELETE, AND MERGE)
+		DDL -Data Definition Language (CREATE, ALTER, DROP, RENAME, TRUNCATE AND COMMENT)
+		DCL -Data Control Language (GRANT AND REVOKE)
+		TC -Transaction Control (COMMIT, ROLLBACK AND SAVEPOINT)
+		DBMS - DataBase Management System
+
+	Types of databases hierarchical, network, relational and object relational
+
+  ########################################################################################################################################
+
+                                                  Lesson 1 Retrieving data using the SQL statement
+
+  ########################################################################################################################################
+
+	Projection.- Selected columns to be displayed
+	Selection.- Selected rows to be displayed
+	Join.- Bring together data by specifying the link between different tables
+
+	keyword refers to an individual SQL element (SELECT or FROM)
+	clause is a part of a SQL statement (SELECT employee_id, last_name)
+	statement is a conbination of two or more clauses (SELECT * FROM employees)
+
+	Arithmetic Expressions
+
+		Operator precedence
+			Multiplication and division occur before addition and substraction
+			Operations of the same priority are evaluated from left to right
+			Parentheses are used to override the default procedence or to clarify the statement
+
+	Null value
+
+	Null is a value that is unavailable, unassigned, unknown or inapplicable. Null is not the same as zero (zero is a number) or a blank space (blank space is a character)
+
+	Aliases
+
+	AS is an optional keyword
+
+	Data types
+
+	NUMBER(p,s) Number value having a maximum number of digits p, with s digits to the right of the decimal point
+	VARCHAR2(s) Variable-length character value of maximum size s
+	DATE Date and time between January 1, 4712 B.C. and December 31, A.D. 9999
+
+
+  ########################################################################################################################################
+
+                                                  Lesson 2 Restricting and Sorting Data
+
+  ########################################################################################################################################
+
+WHERE clause is used after FROM clause.
+
+You cannont use column alias in the WEHERE clause
+
+Character strings and data values are enconled with single quoation marks (such as 'Luis' and '30-NOV-89'). Strings is case-sensitive and dates are format-sensitive. Defualt format for date 'DD-MON-RR'.
+
+Oracle DB's stores dates in an internal numeric format, representing century, year, month, day, hours, minutes and seconds.
+
+Operators
+
+No equal to condition can be represented by , != or ^=
+
+Values which are retrieved by BETWEEN operator are inclusive.
+
+IN is also known as membership condition, an internally oracle server evaluates it as a set of OR conditions with no performance benefits.
+
+LIKE operator can use % for zero or many characters or _ for one character. Use of both wildcards is valid for example last_name LIKE '_o%';, to find all rows wich second name is o. In addition, use of ESCAPE identifier help us find rows which include wildcard character (% and _) for example job_id LIKE '%SA_%';
+
+
+NULL value is unavailable, unassigned, unknown or inapplicable for that reason we cannot test =. For all those case when we want to retrieve NULL values we can test with IS NULL operator or IS NOT NULL.
+
+
+NOT operator can be used with other SQL operator such as BETWEEN, LIKE and NULL
+
+
+[ORDER BY {column, expr, numeric_position}  [ASCDESC] [NULLS FIRSTNULLS LAST]] clause. 
+
+
+
+Substitution Variables
+
+To supplement 
+	WHERE conditions
+	ORDER BY clauses
+	Column expressions
+	Table names
+	Entire SELECT statements
+
+
+SET VERIFY ON, help us to see in the console output how values define for the DEFINE statement where substituted
+
+  ########################################################################################################################################
+
+                                                  Lesson 3 Using Single-Row Funstions to Customize Output
+
+  ########################################################################################################################################
+
+Functions can be used to do the following
+	Perform calculations on data
+	Modify individual data items
+	Manipulate output for groups of rows
+	Format date and numbers for display
+	Convert column data types
+
+	SQL functions sometimes takes arguments and always return a value.
+
+	Single-row - Return one result per row
+		Character
+		Number
+		Date
+		Convertion
+		General
+
+		
+	Multiple-row - Return one result per set of rows
+
+
+	Types of functions
+
+	Character .- Accepts characte data as input and can return both character and numeric values.
+		Case convertion
+			LOWER
+			UPPER
+			INITCAP
+		Character manipulation
+			CONCAT
+			SUBSTR
+			LENGTH
+			INSTR
+			LPAD | RPAD
+			TRIM
+			REPLACE
+	Number .- Accepts number inputs and returns numeber values
+		ROUND 
+		TRUNC
+		MOD
+	Date
+		SYSDATE
+		MONTHS_BETWEEN **The only which returns a numeric value
+		ADD_MONTHS
+		NEXT_DAT
+		LAST_DAY
+		ROUND
+		TRUNC
+
+		Operations
+			DATE + number -> DATE adds days
+			DATE - number -> DATE subtracts days
+			DATE - DATE   -> NUMBER OF DAYS subtracs one date from another
+			DATE + number/24 -> DATE adds number of hours to a date
+
+			Note* RR (returns date dependind on the current century and if you are between 0-49 or 50-99)
+			is more intelligent than YY which return the year of the currect century, no matter anything.
+	Conversion
+	General
+	
+	
+  ########################################################################################################################################
+
+                                              Lesson 4 Using Convertion Funstions and Conditional Expressions
+
+  ########################################################################################################################################
