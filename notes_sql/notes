@@ -166,3 +166,17 @@ Functions can be used to do the following
                                               Lesson 4 Using Convertion Funstions and Conditional Expressions
 
   ########################################################################################################################################
+
+
+  Data type convertion
+  	Explicit
+  	Implicit
+
+  	In expressions, Oracle server can automatically convert
+  		VARCHAR/CHAR TO NUMBER
+  		VARCHAR/CHAR TO DATE
+
+  		NUMBER TO VARCHAR/CHAR
+  		DATE TO VARCHAR/CHAR
+
+  		CHAR TO NUMBER *Only if the character string represent a valid number
